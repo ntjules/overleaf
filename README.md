@@ -9,7 +9,7 @@
 |       |       | last_name  | string    |
 |       |       | gender     | string    |
 |       |       | email      | string    |
-|       |       | image      | string    |
+|       |       | image      | text      |
 |       |       | username   | string    |
 |       |       | password   | string    |
 |       |       | created_at | timestamp |
@@ -45,4 +45,4 @@ App fuctionalities
 - narrow down the tasks by status
 - list the tasks, sort on the list screen (based on priority, end date, etc.)
 - label tasks and classify them
-- register as a user and see only the tasks I registered
+- register as a user and see only the tasks I registered 
