@@ -32,6 +32,7 @@
 |--------|-------|------------|-----------|
 | labels | label | id         | string    |
 |        |       | label      | string    |
+|        |       | user_id    | string    |
 |        |       | created_at | timestamp |
 |        |       | updated_at | timestamp |
 
