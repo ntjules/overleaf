@@ -3,6 +3,7 @@ class CreateLabels < ActiveRecord::Migration[6.0]
     create_table :labels do |t|
 
       t.string   :label
+      t.integer  :user_id
 
       t.timestamps
     end
