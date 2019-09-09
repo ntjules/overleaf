@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_133106) do
+ActiveRecord::Schema.define(version: 2019_09_09_125843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "labelings", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "task_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "labels", force: :cascade do |t|
     t.string "label"
@@ -23,9 +30,10 @@ ActiveRecord::Schema.define(version: 2019_08_27_133106) do
 
   create_table "tasks", force: :cascade do |t|
     t.datetime "deadline"
-    t.string "task_title"
-    t.text "task_content"
-    t.string "task_status"
+    t.string "title"
+    t.text "content"
+    t.string "status"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -38,7 +46,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_133106) do
     t.string "gender"
     t.string "password"
     t.text "image"
-    t.string "user_type"
+    t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
