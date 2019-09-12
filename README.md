@@ -3,13 +3,13 @@
 
 | Table | Model | Colum_name | Data_type |
 |-------|-------|------------|-----------|
-| users | user  | user_id    | string    |
-|       |       | user_type  | string    |
+| users | user  | id         | string    |
+|       |       | type       | string    |
 |       |       | first_name | string    |
 |       |       | last_name  | string    |
 |       |       | gender     | string    |
 |       |       | email      | string    |
-|       |       | image      | string    |
+|       |       | image      | text      |
 |       |       | username   | string    |
 |       |       | password   | string    |
 |       |       | created_at | timestamp |
@@ -18,21 +18,31 @@
 
 | Table | Model | Colum_name   | Data_type |
 |-------|-------|--------------|-----------|
-| tasks | task  | task_id      | string    |
+| tasks | task  | id           | string    |
 |       |       | deadline     | timestamp |
-|       |       | task_title   | string    |
-|       |       | task_content | text      |
-|       |       | task_status  | string    |
+|       |       | title        | string    |
+|       |       | content      | text      |
+|       |       | status       | string    |
+|       |       | user_id      | integer   |
 |       |       | created_at   | timestamp |
 |       |       | updated_at   | timestamp |
 
 
 | Table  | Model | Colum_name | Data_type |
 |--------|-------|------------|-----------|
-| labels | label | label_id   | string    |
+| labels | label | id         | string    |
 |        |       | label      | string    |
+|        |       | user_id    | string    |
 |        |       | created_at | timestamp |
 |        |       | updated_at | timestamp |
+
+| Table     | Model    | Colum_name | Data_type |
+|-----------|----------|------------|-----------|
+| labelings | labeling | id         | string    |
+|           |          | user_id    |           |
+|           |          | task_id    | string    |
+|           |          | created_at | timestamp |
+|           |          | updated_at | timestamp |
 
 
 App fuctionalities
@@ -45,4 +55,4 @@ App fuctionalities
 - narrow down the tasks by status
 - list the tasks, sort on the list screen (based on priority, end date, etc.)
 - label tasks and classify them
-- register as a user and see only the tasks I registered
+- register as a user and see only the tasks I registered 
