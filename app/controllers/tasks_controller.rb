@@ -8,9 +8,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.create(task_params)
+    @task = Task.new(task_params)
+
     if @task.save
-      redirect_to tasks_path, notice: 'Task was successfully created.'
+      redirect_to all_tasks_path, notice: 'Task was successfully created.'
     else
      render 'new'
     end
@@ -25,7 +26,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: 'Task was successfully updated.'
+      redirect_to all_tasks_path, notice: 'Task was successfully updated.'
     else
       render :edit
     end
