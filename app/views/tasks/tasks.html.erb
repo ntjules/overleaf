@@ -1,5 +1,7 @@
 <button><%= link_to 'New Task', new_task_path %></button>
 <hr>
+ <%#= button_to "created date descending", all_tasks_path(order: "date desc"), form: {style: 'display:inline-block;'} %></p>
+<br><br>
 <p id="notice"><%= notice %></p>
 <% @tasks.each do |task| %>
   <h3><%= task.title %></h3>
