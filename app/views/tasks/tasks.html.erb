@@ -1,18 +1,13 @@
 <button><%= link_to 'New Task', new_task_path %></button>
-
 <hr>
-
 <p id="notice"><%= notice %></p>
 <% @tasks.each do |task| %>
-
-    <h3><%= task.title %></h3>
-    <p><%= task.title %> </p>
-    <p>deadline: <%= task&.deadline&.strftime('%B %e, %Y') %></p>
-
-    
-    
-    <button><%= link_to 'Edit', edit_task_path(task) %></button>
-     <button><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></button>
-    <p>-------------------------------------------------------</p>
+  <h3><%= task.title %></h3>
+  <p><%= task.content %> </p>
+  <p>deadline: <%= task&.deadline&.strftime('%B %e, %Y') %></p>
+  <%= button_to "Edit", edit_task_path(task), :method => "get" , form: {style: 'display:inline-block;'}%>
+  <%= button_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } , form: {style: 'display:inline-block;'}%>
+  <%= button_to 'Show', task, :method => "get" , form: {style: 'display:inline-block;'}%>
+  
+  <p>-------------------------------------------------------</p>
 <% end %>
-
