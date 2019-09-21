@@ -1,6 +1,6 @@
-require_relative 'boot'
+require_relative "boot"
 
-require 'rails/all'
+require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -15,6 +15,10 @@ module Overleaf
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.time_zone = "Cairo"
+    config.active_record.default_timezone = :local
+
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: true,
@@ -25,5 +29,6 @@ module Overleaf
         request_specs: false
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
+
   end
 end
