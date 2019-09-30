@@ -2,7 +2,9 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def tasks
-    @tasks = Task.all.order(created_at: :desc)
+    @tasks = Task.all
+    # @tasks = Task.all.order(created_at: :desc)
+
     # if params[:order] == "date desc"
     #   @tasks = Task.all.order(created_at: :desc)
     # elsif params[:order] == "date asc"
