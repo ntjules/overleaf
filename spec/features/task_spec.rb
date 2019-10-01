@@ -80,6 +80,6 @@ RSpec.feature "Tasks", type: :feature do
     # expect(page).to have_content "September 19, 2019"
     # expect(Task.order("created_at desc").each)
 
-    expect(Task.all).to eq [@task3, @task2, @task1]
+    expect(Task.all.recent).to eq [@task3, @task2, @task1]
   end
 end
