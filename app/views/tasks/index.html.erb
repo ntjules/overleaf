@@ -1,8 +1,10 @@
 <button><%= link_to 'New Task', new_task_path %></button>
 <hr>
-
-<%= button_to "sort by deadline desc", all_tasks_path(order: "date_desc"), form: {style: 'display:inline-block;'} %>
-<%= button_to "sort by deadline asc", all_tasks_path(order: "date_asc"), form: {style: 'display:inline-block;'} %>
+ <%#= button_to "created date descending", all_tasks_path(order: "date desc"), form: {style: 'display:inline-block;'} %></p>
+<br><br>
+<%#= button_to "created date descending", tasks_path(sort_param: "created_at Desc"), :method => "get", form: {style: 'display:inline-block;'} %></p>
+<br><br>
+<%#= button_to "created date asc", tasks_path(sort_param: "created_at asc"), :method => "get", form: {style: 'display:inline-block;'} %></p>
 <br><br>
 <p id="notice"><%= notice %></p>
 <% @tasks.each do |task| %>
