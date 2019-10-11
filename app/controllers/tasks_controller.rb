@@ -16,7 +16,6 @@ class TasksController < ApplicationController
       @tasks = Task.all.order(deadline: :asc)
     else
       @tasks = Task.all.recent
-      puts "not getting order"
     end
 
     # if params.has_key?(:sort_param)

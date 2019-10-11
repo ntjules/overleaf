@@ -7,8 +7,8 @@ RSpec.feature "Task_feature", type: :feature do
     # }
 
     @task1 = FactoryBot.create(:task, title: "title test 1", content: "content test 1", deadline: "2019-09-19 08:16:32")
-    @task2 = FactoryBot.create(:task, title: "title test 2", content: "content test 2", deadline: "2019-09-19 08:16:32")
-    @task3 = FactoryBot.create(:task, title: "title test 3", content: "content test 3", deadline: "2019-09-19 08:16:32")
+    @task2 = FactoryBot.create(:task, title: "title test 2", content: "content test 2", deadline: "2019-09-25 08:16:32")
+    @task3 = FactoryBot.create(:task, title: "title test 3", content: "content test 3", deadline: "2019-09-20 08:16:32")
   end
   scenario "Test task list" do
     # Task.create!(title: "title test", content: "content test", deadline: "2019-09-19 08:16:32")
@@ -81,5 +81,11 @@ RSpec.feature "Task_feature", type: :feature do
     # expect(Task.order("created_at desc").each)
 
     expect(Task.all.recent).to eq [@task3, @task2, @task1]
+  end
+  scenario "Test for arrangement, deadline desc" do
+    visit all_tasks_path
+    click_button("sort by deadline desc", match: :first)
+
+    expect(Task.all.order(deadline: :desc)).to eq [@task2, @task3, @task1]
   end
 end
