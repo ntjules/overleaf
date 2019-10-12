@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.feature "Tasks", type: :feature do
+RSpec.feature "Task_feature", type: :feature do
   background do
     # (1..10).each { |i|
     #   tasks = FactoryBot.create(:task, title: "title test #{i}", content: "content test #{i}", deadline: "2019-09-19 08:16:32")
