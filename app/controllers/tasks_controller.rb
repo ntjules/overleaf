@@ -1,19 +1,28 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+  # def index
+  #     end
+
   def tasks
     # @tasks = Task.all
-    @tasks = Task.all.recent
+    # @tasks = Task.all.recent
 
     # @tasks = Task.all.order(created_at: :desc)
 
-    # if params[:order] == "date desc"
-    #   @tasks = Task.all.order(created_at: :desc)
-    # elsif params[:order] == "date asc"
-    #   @tasks = Task.all.order(created_at: :asc)
-    # else
-    #   @tasks = Task.all
+    if params[:order] == "date_desc"
+      @tasks = Task.all.order(deadline: :desc)
+    elsif params[:order] == "date_asc"
+      @tasks = Task.all.order(deadline: :asc)
+    else
+      @tasks = Task.all.recent
+    end
+
+    # if params.has_key?(:sort_param)
+    #   @tasks = Task.all.recent.order("#{params[:sort_param]}")
     # end
+
+    # @tasks = Task.all.recent
   end
 
   def create
