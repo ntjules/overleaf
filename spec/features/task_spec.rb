@@ -6,7 +6,7 @@ RSpec.feature "Task_feature", type: :feature do
     #   tasks = FactoryBot.create(:task, title: "title test #{i}", content: "content test #{i}", deadline: "2019-09-19 08:16:32")
     # }
 
-    @task1 = FactoryBot.create(:task, title: "title test 1", content: "content test 1", deadline: "2019-09-19 08:16:32")
+    @task1 = FactoryBot.create(:task, title: "title test1", content: "content test 1", deadline: "2019-09-19 08:16:32")
     @task2 = FactoryBot.create(:task, title: "title test 2", content: "content test 2", deadline: "2019-09-25 08:16:32")
     @task3 = FactoryBot.create(:task, title: "title test 3", content: "content test 3", deadline: "2019-09-20 08:16:32")
   end
@@ -88,4 +88,13 @@ RSpec.feature "Task_feature", type: :feature do
 
     expect(Task.all.order(deadline: :desc)).to eq [@task2, @task3, @task1]
   end
+  # scenario "narrows results for a task using the search box by title and status" do
+  #   visit all_tasks_path
+
+  #   fill_in "title", with: "test1"
+
+  #   click_button "Search"
+
+  #   expect(page).to have_text(@task1.title)
+  # end
 end

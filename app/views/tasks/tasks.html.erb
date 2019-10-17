@@ -4,14 +4,48 @@
 <%= button_to "sort by deadline desc", all_tasks_path(order: "date_desc"), form: {style: 'display:inline-block;'} %>
 <%= button_to "sort by deadline asc", all_tasks_path(order: "date_asc"), form: {style: 'display:inline-block;'} %>
 <br><br>
+
+
+
+<%= search_form_for @search do |f| %>
+
+
+  <%= f.label :title_or_status_cont %>
+  <%= f.search_field :title_or_status_cont %>
+
+  <%= f.submit %>
+<% end %>
+<%= link_to "Reset Search", all_tasks_path %>
+
+
+
+
+
+
+
+
+
+<br><br>
 <p id="notice"><%= notice %></p>
 <% @tasks.each do |task| %>
-  <h3><%= task.title %></h3>
-  <p><%= task.content %> </p>
-  <p>deadline: <%= task&.deadline&.strftime('%B %e, %Y') %></p>
+  <h3><%= task.title %>
+
+  <% task.aasm.events(possible: true).map(&:name).each do |event| %>
+  <%= link_to t(event, scope: [:task, :event]), [event, task], method: :patch, class: "btn btn-#{t event, scope: [:task, :btn_class]}" %>
+<% end %>
+</h3> 
+  <p>Content: <%= task.content %> </p>
+  <p>Status: <%= task.status %> </p>
+  <p>Deadline: <%= task&.deadline&.strftime('%B %e, %Y') %></p>
+
+  
+
+  
   <%= button_to "Edit", edit_task_path(task), :method => "get" , form: {style: 'display:inline-block;'}%>
   <%= button_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } , form: {style: 'display:inline-block;'}%>
   <%= button_to 'Show', task, :method => "get" , form: {style: 'display:inline-block;'}%>
   
   <p>-------------------------------------------------------</p>
 <% end %>
+
+<%#= will_paginate @tasks %>
