@@ -6,9 +6,9 @@ RSpec.feature "Task_feature", type: :feature do
     #   tasks = FactoryBot.create(:task, title: "title test #{i}", content: "content test #{i}", deadline: "2019-09-19 08:16:32")
     # }
 
-    @task1 = FactoryBot.create(:task, title: "title test1", content: "content test 1", deadline: "2019-09-19 08:16:32")
-    @task2 = FactoryBot.create(:task, title: "title test 2", content: "content test 2", deadline: "2019-09-25 08:16:32")
-    @task3 = FactoryBot.create(:task, title: "title test 3", content: "content test 3", deadline: "2019-09-20 08:16:32")
+    @task1 = FactoryBot.create(:task, title: "title test1", content: "content test 1", deadline: "2019-09-19 08:16:32", priority: 1)
+    @task2 = FactoryBot.create(:task, title: "title test 2", content: "content test 2", deadline: "2019-09-25 08:16:32", priority: 0)
+    @task3 = FactoryBot.create(:task, title: "title test 3", content: "content test 3", deadline: "2019-09-20 08:16:32", priority: 2)
   end
   scenario "Test task list" do
     # Task.create!(title: "title test", content: "content test", deadline: "2019-09-19 08:16:32")
@@ -27,6 +27,7 @@ RSpec.feature "Task_feature", type: :feature do
     fill_in "task_title", with: "title test"
     fill_in "task_content", with: "content test"
     fill_in "task_deadline", with: "2019-09-19 08:16:32"
+    select "low", :from => "Priority"
     click_on "Create Task"
 
     expect(page).to have_content "title test"
@@ -96,5 +97,12 @@ RSpec.feature "Task_feature", type: :feature do
     click_button "Search"
 
     expect(page).to have_text(@task1.title)
+  end
+
+  scenario "Test for sort by high priority" do
+    visit all_tasks_path
+    click_button("sort high priority")
+
+    expect(Task.all.order(priority: :desc)).to eq [@task3, @task1, @task2]
   end
 end
