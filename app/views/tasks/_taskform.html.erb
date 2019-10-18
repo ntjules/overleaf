@@ -26,5 +26,10 @@
     <%= form.date_field :deadline %>
   </div>
   <br>
+  <div class="field">
+  <%= form.label :priority %><br>
+  <%= form.select :priority, Task.priorities.keys , :prompt => "Choose priority"%>
+</div>
+<br>
   <%= form.submit %>
 <% end %>

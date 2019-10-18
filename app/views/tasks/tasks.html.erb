@@ -41,6 +41,10 @@
   
 
   
+  <h3><%= task.title %></h3>
+  <p><%= task.content %> </p>
+  <p>deadline: <%= task&.deadline&.strftime('%B %e, %Y') %></p>
+  <p>priority: <%= task.priority %></p>
   <%= button_to "Edit", edit_task_path(task), :method => "get" , form: {style: 'display:inline-block;'}%>
   <%= button_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } , form: {style: 'display:inline-block;'}%>
   <%= button_to 'Show', task, :method => "get" , form: {style: 'display:inline-block;'}%>

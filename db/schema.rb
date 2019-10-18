@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_10_17_085914) do
+=======
+ActiveRecord::Schema.define(version: 2019_10_18_094040) do
+>>>>>>>  able to register priority, sort and test remains
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +42,7 @@ ActiveRecord::Schema.define(version: 2019_10_17_085914) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "aasm_state"
+    t.integer "priority", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,12 +51,11 @@ ActiveRecord::Schema.define(version: 2019_10_17_085914) do
     t.string "first_name"
     t.string "last_name"
     t.string "gender"
-    t.string "password_digest"
+    t.string "password"
     t.text "image"
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
