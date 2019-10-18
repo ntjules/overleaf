@@ -12,7 +12,9 @@ gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.7"
 gem "aasm", "~> 4.12" #  for state management
 gem "ransack"   #  for sorting & serching
-gem "will_paginate" #  for pagination
+# gem "will_paginate" #  for pagination
+gem "kaminari" #  for pagination
+
 gem "bootsnap", ">= 1.4.2", require: false
 
 group :development, :test do

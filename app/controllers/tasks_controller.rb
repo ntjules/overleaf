@@ -13,20 +13,21 @@ class TasksController < ApplicationController
 
     if params[:order] == "date_desc"
       @search.sorts = "deadline desc" if @search.sorts.empty?
-      @tasks = @search.result
+      @tasks = @search.result.page params[:page]
     elsif params[:order] == "date_asc"
       @search.sorts = "deadline asc" if @search.sorts.empty?
-      @tasks = @search.result
+      @tasks = @search.result.page params[:page]
     elsif params[:order] == "hpri"
       @search.sorts = "priority desc" if @search.sorts.empty?
-      @tasks = @search.result
+      @tasks = @search.result.page params[:page]
     else
       # @search = Task.ransack(params[:q])
       # @tasks = @search.result
       # @search.build_condition
-      # @tasks = @search.result.paginate(page: params[:page], per_page: 3)
+      # @tasks = @search.result.paginate(page: params[:page], per_page: 2)
+      @tasks = @search.result.page params[:page]
 
-      @tasks = @search.result(distinct: true)
+      # @tasks = @search.result(distinct: true)
     end
 
     # if params.has_key?(:sort_param)

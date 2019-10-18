@@ -35,4 +35,5 @@ class Task < ApplicationRecord
     end
   end
   enum priority: [:low, :medium, :high]
+  paginates_per 3
 end
