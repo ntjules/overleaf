@@ -88,13 +88,13 @@ RSpec.feature "Task_feature", type: :feature do
 
     expect(Task.all.order(deadline: :desc)).to eq [@task2, @task3, @task1]
   end
-  # scenario "narrows results for a task using the search box by title and status" do
-  #   visit all_tasks_path
+  scenario "narrows results for a task using the search box by title and status" do
+    visit all_tasks_path
 
-  #   fill_in "title", with: "test1"
+    fill_in "q_title_or_status_cont", with: "test1"
 
-  #   click_button "Search"
+    click_button "Search"
 
-  #   expect(page).to have_text(@task1.title)
-  # end
+    expect(page).to have_text(@task1.title)
+  end
 end

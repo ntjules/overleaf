@@ -34,4 +34,23 @@ RSpec.describe "Task_model", type: :model do
       expect(Task.title_like("tit")).to eq [@task2]
     end
   end
+
+  context "Status management" do
+    before(:all) do
+      @task = FactoryBot.create(:task, title: "test", content: "content test 1", deadline: "2019-09-19 08:16:32")
+    end
+    it "should have Notstarted satus " do
+      expect(@task).to have_state(:notstarted)
+    end
+    it "should allow event start " do
+      expect(@task).to allow_event(:start)
+    end
+    it "should not allow restart and Done events" do
+      expect(@task).to_not allow_event :restart
+      expect(@task).to_not allow_event :done
+    end
+    it "should transition_from Notstarted to inprogress" do
+      expect(@task).to transition_from(:notstarted).to(:inprogress).on_event(:start)
+    end
+  end
 end
