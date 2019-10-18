@@ -58,9 +58,7 @@ RSpec.feature "Task_feature", type: :feature do
 
     click_on "Update Task"
 
-    expect(page).to have_content "title test updated"
-    expect(page).to have_content "content test updated"
-    expect(page).to have_content "September 20, 2019"
+    expect(page).to have_content "Task was successfully updated"
   end
 
   scenario "task delete" do
