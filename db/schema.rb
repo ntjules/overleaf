@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2019_10_17_085914) do
-=======
 ActiveRecord::Schema.define(version: 2019_10_18_094040) do
->>>>>>>  able to register priority, sort and test remains
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"

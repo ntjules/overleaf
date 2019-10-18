@@ -3,6 +3,8 @@
 
 <%= button_to "sort by deadline desc", all_tasks_path(order: "date_desc"), form: {style: 'display:inline-block;'} %>
 <%= button_to "sort by deadline asc", all_tasks_path(order: "date_asc"), form: {style: 'display:inline-block;'} %>
+<%= button_to "sort high priority", all_tasks_path(order: "hpri"), form: {style: 'display:inline-block;'} %>
+
 <br><br>
 
 
@@ -37,13 +39,6 @@
   <p>Content: <%= task.content %> </p>
   <p>Status: <%= task.status %> </p>
   <p>Deadline: <%= task&.deadline&.strftime('%B %e, %Y') %></p>
-
-  
-
-  
-  <h3><%= task.title %></h3>
-  <p><%= task.content %> </p>
-  <p>deadline: <%= task&.deadline&.strftime('%B %e, %Y') %></p>
   <p>priority: <%= task.priority %></p>
   <%= button_to "Edit", edit_task_path(task), :method => "get" , form: {style: 'display:inline-block;'}%>
   <%= button_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } , form: {style: 'display:inline-block;'}%>

@@ -34,5 +34,5 @@ class Task < ApplicationRecord
       transitions from: [:inprogress], to: :done
     end
   end
-  enum priority: [:high, :medium, :low]
+  enum priority: [:low, :medium, :high]
 end

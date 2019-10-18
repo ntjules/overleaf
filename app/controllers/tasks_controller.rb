@@ -17,6 +17,9 @@ class TasksController < ApplicationController
     elsif params[:order] == "date_asc"
       @search.sorts = "deadline asc" if @search.sorts.empty?
       @tasks = @search.result
+    elsif params[:order] == "hpri"
+      @search.sorts = "priority desc" if @search.sorts.empty?
+      @tasks = @search.result
     else
       # @search = Task.ransack(params[:q])
       # @tasks = @search.result
