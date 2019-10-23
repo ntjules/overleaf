@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     # @tasks = Task.all.recent
 
     # @tasks = Task.all.order(created_at: :desc)
-    @search = Task.ransack(params[:q])
+    @search = Task.recent.ransack(params[:q])
 
     if params[:order] == "date_desc"
       @search.sorts = "deadline desc" if @search.sorts.empty?
@@ -19,6 +19,15 @@ class TasksController < ApplicationController
       @tasks = @search.result.page params[:page]
     elsif params[:order] == "hpri"
       @search.sorts = "priority desc" if @search.sorts.empty?
+      @tasks = @search.result.page params[:page]
+    elsif params[:order] == "pr_high"
+      @search = Task.recent.high.ransack(params[:q])
+      @tasks = @search.result.page params[:page]
+    elsif params[:order] == "pr_med"
+      @search = Task.recent.medium.ransack(params[:q])
+      @tasks = @search.result.page params[:page]
+    elsif params[:order] == "pr_low"
+      @search = Task.recent.low.ransack(params[:q])
       @tasks = @search.result.page params[:page]
     else
       # @search = Task.ransack(params[:q])
