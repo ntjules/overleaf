@@ -1,14 +1,134 @@
-<h2> <%= t('view.show') %> </h2>
+<div class="form-group pt-3">
+  <%= link_to 'Back', all_tasks_path, class:"btn btn-outline-primary" %>
+</div>
 
-<p id="notice"><%= notice %></p>
-<p>
-  <strong><%= t('view.title') %>: </strong>
-  <%= @task.title %>
-</p>
-<p>
-  <strong><%= t('view.content') %>:</strong>
-  <%= @task.content %>
-</p>
+<div class="col-lg-6 col-md-6 col-sm-12 offset-2">
+<h1 class="display-4">Task Detail</h1>
+</div>
 
-<%= link_to 'Edit', edit_task_path(@task), form: {style: 'display:inline-block;'} %>
-<%= button_to 'Back', all_tasks_path, :method => "get", form: {style: 'display:inline-block;'} %>
+
+  <div class="col-lg-6 col-md-6 col-sm-12 offset-3">
+
+      <div class="card border-info" >
+        <div class="card-header pl-2">
+            <% if @task.status.to_s  == "notstarted" %>
+            <span class="badge badge-pill badge-primary badge-outlined"><%= @task.status %></span>
+
+            <% elsif @task.status.to_s  == "inprogress" %>
+            <span class="badge badge-pill badge-info "> <%= @task.status %></span>
+            <% elsif @task.status.to_s  == "stoped" %>
+            <span class="badge badge-pill badge-danger"><%= @task.status %></span>
+            <% elsif @task.status.to_s  == "done" %>
+            <span class="badge badge-pill badge-success"><%= @task.status %></span>
+            <% end %>
+         
+
+          <%# @task.aasm.events(possible: true).map(&:name).each do |event| %>
+          <%#= link_to t(event, scope: [:task, :event]), [event, task], method: :patch, class: "btn btn-#{t event, scope: [:task, :btn_class]}" %>
+          <% @task.aasm.events(possible: true).map(&:name).tap do |event| %>
+          <% if event.include? :start %>
+          <%= link_to "Start", ['start', @task], method: :patch, class: "btn btn-sm btn-outline-primary" %>
+          <% end %>
+          <% if event.include? :stop %>
+          <%= link_to "Stop", ['stop', @task], method: :patch, class: "btn btn-sm btn-outline-danger" %>
+          <% end %>
+          <% if event.include? :restart %>
+          <%= link_to "Restart", ['restart', @task], method: :patch, class: "btn btn-sm btn-outline-info" %>
+          <% end %>
+          <% if event.include? :done %>
+          <%= link_to "Done", ['done', @task], method: :patch, class: "btn btn-sm btn-outline-success" %>
+          <% end %>
+          <% end %>
+          <div class="btn-group float-xl-right">
+            <button type="button" class="btn btn-outline-dark dropdown-toggle " data-toggle="dropdown">
+              Action <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-item">
+                <%= link_to "Edit", edit_task_path(@task) , form: {style: 'display:inline-block;'}, class: "btn btn-outline-dark btn-md btn-block" %>
+              </li>
+              
+              <li class="divider"></li>
+              <li class="dropdown-item">
+                <%= link_to 'Delete', @task, method: :delete, data: { confirm: 'Are you sure?' } , form: {style: 'display:inline-block;'}, class: "btn btn-outline-dark btn-md btn-block" %>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-body">
+
+          <div class="card-text">
+
+            <h3><strong><%= @task.title %></strong> </h3>
+          
+            <blockquote class="blockquote">
+                <p class="mb-0 pt-2"><em><%= @task.content %></em></p>
+                <!-- <footer class="blockquote-footer">by <cite>Albert Einstein</cite></footer> -->
+            </blockquote>
+            
+
+
+
+
+
+            <%#= button_to "Edit", edit_task_path(task), :method => "get" , form: {style: 'display:inline-block;'}%>
+            <%#= button_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } , form: {style: 'display:inline-block;'}%>
+            <%#= button_to 'Show', task, :method => "get" , form: {style: 'display:inline-block;'}%>
+
+
+          </div>
+
+
+
+
+
+          <%#= will_paginate @tasks %>
+
+
+
+
+        </div>
+        <div class="card-footer" style="padding-right: 1;">
+          Deadline:<label class="text-danger"> <%= @task&.deadline&.strftime('%B %e, %Y') %></label>
+
+          <!-- <p>priority: <%= @task.priority %></p> -->
+          
+            <% if @task.priority == "high" %>
+            <span class="badge badge-dark float-right"><%= @task.priority %> priority</span>
+            <% end %>
+            <% if @task.priority == "medium" %>
+            <span class="badge badge-secondary float-right" ><%= @task.priority %> priority</span>
+            <% end %>
+            <% if @task.priority == "low" %>
+            <span class="badge badge-light float-right"><%= @task.priority %> priority</span>
+            <% end %>
+        
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
