@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :stop_stask, :restart_stask, :done_stask, :start_stask]
 
   # def index
   #     end
@@ -9,13 +9,21 @@ class TasksController < ApplicationController
     # @tasks = Task.all.recent
 
     # @tasks = Task.all.order(created_at: :desc)
+    @search = Task.ransack(params[:q])
 
     if params[:order] == "date_desc"
-      @tasks = Task.all.order(deadline: :desc)
+      @search.sorts = "deadline desc" if @search.sorts.empty?
+      @tasks = @search.result
     elsif params[:order] == "date_asc"
-      @tasks = Task.all.order(deadline: :asc)
+      @search.sorts = "deadline asc" if @search.sorts.empty?
+      @tasks = @search.result
     else
-      @tasks = Task.all.recent
+      # @search = Task.ransack(params[:q])
+      # @tasks = @search.result
+      # @search.build_condition
+      # @tasks = @search.result.paginate(page: params[:page], per_page: 3)
+
+      @tasks = @search.result(distinct: true)
     end
 
     # if params.has_key?(:sort_param)
@@ -40,6 +48,26 @@ class TasksController < ApplicationController
   end
 
   def edit
+  end
+
+  def stop_stask
+    @task.stop!
+    redirect_to all_tasks_path, notice: "Task Stoped."
+  end
+
+  def restart_stask
+    @task.restart!
+    redirect_to all_tasks_path, notice: "Task Restarted"
+  end
+
+  def done_stask
+    @task.done!
+    redirect_to all_tasks_path, notice: "Task Restarted"
+  end
+
+  def start_stask
+    @task.start!
+    redirect_to all_tasks_path, notice: "Task Restarted"
   end
 
   def show

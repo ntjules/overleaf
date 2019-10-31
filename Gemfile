@@ -10,9 +10,9 @@ gem "sass-rails", "~> 5"
 gem "webpacker", "~> 4.0"
 gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.7"
-#  for state management
-gem "aasm", "~> 4.12"
-
+gem "aasm", "~> 4.12" #  for state management
+gem "ransack"   #  for sorting & serching
+gem "will_paginate" #  for pagination
 gem "bootsnap", ">= 1.4.2", require: false
 
 group :development, :test do
