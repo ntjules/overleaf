@@ -14,6 +14,7 @@ gem "aasm", "~> 4.12" #  for state management
 gem "ransack"   #  for sorting & serching
 # gem "will_paginate" #  for pagination
 gem "kaminari" #  for pagination
+gem "bootstrap4-kaminari-views"
 
 gem "bootsnap", ">= 1.4.2", require: false
 

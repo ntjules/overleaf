@@ -1,52 +1,135 @@
-<button><%= link_to 'New Task', new_task_path %></button>
-<hr>
+<!-- <div class="col-sm">
+      <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top"
+        title="Tooltip on top topdk">
+        Tooltip on top
+      </button>
+    </div> -->
 
-<%= button_to "sort by deadline desc", all_tasks_path(order: "date_desc"), form: {style: 'display:inline-block;'} %>
-<%= button_to "sort by deadline asc", all_tasks_path(order: "date_asc"), form: {style: 'display:inline-block;'} %>
-<%= button_to "sort high priority", all_tasks_path(order: "hpri"), form: {style: 'display:inline-block;'} %>
-
-<br><br>
-
-
-
-<%= search_form_for @search do |f| %>
-
-
-  <%= f.label :title_or_status_cont %>
-  <%= f.search_field :title_or_status_cont %>
-
-  <%= f.submit %>
-<% end %>
-<%= link_to "Reset Search", all_tasks_path %>
-
-
-
-
-
-
-
-
-
-<br><br>
-<p id="notice"><%= notice %></p>
 <% @tasks.each do |task| %>
-  <h3><%= task.title %>
+<div class="col-lg-4 col-md-6 col-sm-12 pb-2">
 
-  <% task.aasm.events(possible: true).map(&:name).each do |event| %>
-  <%= link_to t(event, scope: [:task, :event]), [event, task], method: :patch, class: "btn btn-#{t event, scope: [:task, :btn_class]}" %>
+  <div class="card border-info" style="min-height: 28rem; max-height: 28rem;">
+    <div class="card-header pl-2">
+      <% if task.status.to_s  == "notstarted" %>
+      <span class="badge badge-pill badge-primary badge-outlined"><%= task.status %></span>
+
+      <% elsif task.status.to_s  == "inprogress" %>
+      <span class="badge badge-pill badge-info"><%= task.status %></span>
+      <% elsif task.status.to_s  == "stoped" %>
+      <span class="badge badge-pill badge-danger"><%= task.status %></span>
+      <% elsif task.status.to_s  == "done" %>
+      <span class="badge badge-pill badge-success"><%= task.status %></span>
+      <% end %>
+
+
+      <%# task.aasm.events(possible: true).map(&:name).each do |event| %>
+      <%#= link_to t(event, scope: [:task, :event]), [event, task], method: :patch, class: "btn btn-#{t event, scope: [:task, :btn_class]}" %>
+      <% task.aasm.events(possible: true).map(&:name).tap do |event| %>
+      <% if event.include? :start %>
+      <%= link_to "Start", ['start', task], method: :patch, class: "btn btn-sm btn-outline-primary" %>
+      <% end %>
+      <% if event.include? :stop %>
+      <%= link_to "Stop", ['stop', task], method: :patch, class: "btn btn-sm btn-outline-danger" %>
+      <% end %>
+      <% if event.include? :restart %>
+      <%= link_to "Restart", ['restart', task], method: :patch, class: "btn btn-sm btn-outline-info" %>
+      <% end %>
+      <% if event.include? :done %>
+      <%= link_to "Done", ['done', task], method: :patch, class: "btn btn-sm btn-outline-success" %>
+      <% end %>
+      <% end %>
+      <div class="btn-group float-xl-right">
+        <button type="button" class="btn btn-outline-dark dropdown-toggle " data-toggle="dropdown">
+          Action <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li class="dropdown-item">
+            <%= link_to "Edit", edit_task_path(task) , form: {style: 'display:inline-block;'}, class: "btn btn-outline-dark btn-md btn-block" %>
+          </li>
+          <li class="dropdown-item">
+            <%= link_to 'Show', task , form: {style: 'display:inline-block;'}, class: "btn btn-outline-dark btn-md btn-block" %>
+          </li>
+          <li class="divider"></li>
+          <li class="dropdown-item">
+            <%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } , form: {style: 'display:inline-block;'}, class: "btn btn-outline-dark btn-md btn-block" %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="card-text">
+
+
+        <h3><strong><%= task.title %></strong></h3>
+
+
+        <% if task.content.length > 120 %>
+
+
+        <blockquote class="blockquote">
+          <p class="mb-0 pt-1 pl-3">
+             <%= truncate(task.content, length: 100) %>
+            <%= link_to 'Read more',task, class: "" %>
+          </p>
+          <!-- <footer class="blockquote-footer">by <cite>Albert Einstein</cite></footer> -->
+        </blockquote>
+
+        <% else %>
+        <blockquote class="blockquote">
+          <p class="mb-0 pt-1 pl-3"><%= task.content %></p>
+          <!-- <footer class="blockquote-footer">by <cite>Albert Einstein</cite></footer> -->
+        </blockquote>
+        <% end %>
+
+
+
+
+
+
+        <%#= button_to "Edit", edit_task_path(task), :method => "get" , form: {style: 'display:inline-block;'}%>
+        <%#= button_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } , form: {style: 'display:inline-block;'}%>
+        <%#= button_to 'Show', task, :method => "get" , form: {style: 'display:inline-block;'}%>
+
+
+      </div>
+
+
+
+
+
+      <%#= will_paginate @tasks %>
+
+
+
+
+    </div>
+    <div class="card-footer" style="padding-right: 1;">
+      Deadline:<label class="text-danger"> <%= task&.deadline&.strftime('%B %e, %Y') %></label>
+
+      <!-- <p>priority: <%= task.priority %></p> -->
+
+      <% if task.priority == "high" %>
+      <span class="badge badge-dark float-right"><%= task.priority %> priority</span>
+      <% end %>
+      <% if task.priority == "medium" %>
+      <span class="badge badge-secondary float-right"><%= task.priority %> priority</span>
+      <% end %>
+      <% if task.priority == "low" %>
+      <span class="badge badge-light float-right"><%= task.priority %> priority</span>
+      <% end %>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
 <% end %>
-</h3> 
-  <p>Content: <%= task.content %> </p>
-  <p>Status: <%= task.status %> </p>
-  <p>Deadline: <%= task&.deadline&.strftime('%B %e, %Y') %></p>
-  <p>priority: <%= task.priority %></p>
-  <%= button_to "Edit", edit_task_path(task), :method => "get" , form: {style: 'display:inline-block;'}%>
-  <%= button_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } , form: {style: 'display:inline-block;'}%>
-  <%= button_to 'Show', task, :method => "get" , form: {style: 'display:inline-block;'}%>
-  
-  <p>-------------------------------------------------------</p>
-<% end %>
 
-<%#= will_paginate @tasks %>
 
-<%= paginate @tasks %>
+<div class=" pagination justify-content-center col-lg-12">
+  <%= paginate @tasks, theme: 'twitter-bootstrap-4' %>
+</div>
