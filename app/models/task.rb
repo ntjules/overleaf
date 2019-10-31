@@ -2,7 +2,7 @@ class Task < ApplicationRecord
   include AASM
   validates :title, presence: true, length: { maximum: 60 }
   validates :content, presence: true, length: { maximum: 150 }
-  validates :deadline, presence: true
+  validates :deadline, :priority, presence: true
 
   # default_scope { order(created_at: :desc) }
   scope :recent, -> { order(created_at: :desc) }
@@ -34,4 +34,5 @@ class Task < ApplicationRecord
       transitions from: [:inprogress], to: :done
     end
   end
+  enum priority: [:low, :medium, :high]
 end
