@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # root :to => "tasks#tasks", as: "all_tasks"
-  post "/", to: "tasks#tasks"
+  # post "/", to: "tasks#tasks"
 
   get "tasks", to: "tasks#tasks", as: "all_tasks"
   root :to => "users#new", as: "homepage"
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "/tasks" => "tasks#tasks"
   resources :tasks, :except => [:index]
   resources :users, only: [:new, :create, :show]
+  resources :sessions, only: [:new, :create, :destroy]
   # get 'tasks/tasks'
 
 end

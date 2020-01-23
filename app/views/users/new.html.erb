@@ -1,4 +1,4 @@
-<h1>Sign up</h1>
+
 
 <% if @user.errors.any? %>
   <div id="error_explanation">
@@ -10,6 +10,13 @@
     </ul>
   </div>
 <% end %>
+
+
+<%= render 'loginform' %>
+
+
+
+<h1>Sign up</h1>
 
 <%= form_with(model: @user, local: true) do |f| %>
   <%= f.label :first_name %>
