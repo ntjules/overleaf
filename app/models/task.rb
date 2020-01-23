@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+  belongs_to :user
   include AASM
   validates :title, presence: true, length: { maximum: 60 }
   validates :content, presence: true, length: { maximum: 300 }

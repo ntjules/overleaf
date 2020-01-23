@@ -48,7 +48,8 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-
+    @user = User.find(1)
+    @task.user = @user
     if @task.save
       redirect_to all_tasks_path, notice: "Task was successfully created."
     else
