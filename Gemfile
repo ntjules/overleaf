@@ -15,6 +15,7 @@ gem "ransack"   #  for sorting & serching
 # gem "will_paginate" #  for pagination
 gem "kaminari" #  for pagination
 gem "bootstrap4-kaminari-views"
+gem "bcrypt", "3.1.13"
 
 gem "bootsnap", ">= 1.4.2", require: false
 
