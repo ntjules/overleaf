@@ -1,13 +1,36 @@
-<h1>Log in</h1>
 
-<%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
-
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.submit "Log in" %>
+    <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
+<form>
+  <div class="form-row align-items-center">
+      <!-- <div class="col-auto">
+          <div class="form-check mb-2">
+            <h3>Login</h3>
+            </label>
+          </div>
+        </div> -->
+      <div class="col-auto">
+         
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">@</div>
+            </div>
+            <%= f.email_field :email, placeholder:"email", class:"form-control" %>
+            <!-- <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username"> -->
+          </div>
+        </div>
+    <div class="col-auto">
+      
+      <%= f.password_field :password, placeholder:"password", class:"form-control"  %>
+      <!-- <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe"> -->
+    </div>
+    
+    
+    <div class="col-auto">
+        <%= f.submit "Log in", class:"btn btn-primary" %>
+      <!-- <button type="submit" class="btn btn-primary mb-2">Submit</button> -->
+    </div>
+  </div>
+ 
+</form>
 <% end %>
-<br>
+
