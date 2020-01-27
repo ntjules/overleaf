@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # root :to => "tasks#tasks", as: "all_tasks"
   # post "/", to: "tasks#tasks"
 
@@ -15,4 +16,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   # get 'tasks/tasks'
 
+  namespace :admin do
+    resources :users
+  end
 end
