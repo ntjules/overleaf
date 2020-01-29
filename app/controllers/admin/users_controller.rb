@@ -1,8 +1,13 @@
 class Admin::UsersController < ApplicationController
   before_action :logged_in_user
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = User.all.order("id desc")
+    @alltasks = Task.count
+    @allusers = User.count
+    @inprogress = Task.where(status: "inprogress").count
+    @done = Task.all.where(status: "done").count
   end
 
   def new
@@ -19,7 +24,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
@@ -37,6 +41,10 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password,
