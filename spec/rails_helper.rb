@@ -75,6 +75,7 @@ RSpec.configure do |config|
 
   def create_user_and_log_in
     user = User.new
+    user.first_name = "firstname"
     user.email = "user@test.com"
     user.password = "pass123"
     user.save
