@@ -79,8 +79,13 @@
                     class="pl-3"><%= user.email %></label>
                    
                             <%= link_to 'Delete', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } ,  class: "btn btn-primary badge-pill float-right ml-2" %>
+<% if user.email === "ntjules@gmail.com"%>
+<% elsif user.adminrole %>
+<%= link_to "remove admin role", admin_makeadmin_path(user), method: :patch, class: "btn btn-sm btn-outline-info" %>
+       <% else  %>
+       <%= link_to "Add admin role", admin_makeadmin_path(user), method: :patch, class: "btn btn-sm btn-outline-info" %>
 
-              
+       <% end %>      
                         <%= link_to "Edit", edit_admin_user_path(user) , form: {style: 'display:inline-block;'}, class: "btn btn-info badge-pill float-right" %>
  <label  class="label text-white bg-primary float-right mr-5">
    <span class="badge badge-pill badge-light"><%= user.tasks.count %></span> tasks

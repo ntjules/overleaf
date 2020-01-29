@@ -78,6 +78,7 @@ RSpec.configure do |config|
     user.first_name = "firstname"
     user.email = "user@test.com"
     user.password = "pass123"
+    user.adminrole = true
     user.save
     visit new_session_path
     fill_in :session_email, with: "user@test.com"

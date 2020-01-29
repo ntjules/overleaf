@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
       # redirect_to user_path(user.id)
-      redirect_to all_tasks_path
+      redirect_to all_tasks_path, notice: "succefully loged in"
     else
       flash[:danger] = "Failed to login"
       redirect_to homepage_path
