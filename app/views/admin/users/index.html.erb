@@ -14,7 +14,7 @@
                                 <i class="fa fa-user fa-4x"></i>
                             </div>
                             <h6 class="text-uppercase">Users</h6>
-                            <h1 class="display-4">--</h1>
+                            <h1 class="display-4"><%=  @allusers  %></h1>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                                 <i class="fa fa-list fa-4x"></i>
                             </div>
                             <h6 class="text-uppercase">All Tasks</h6>
-                            <h1 class="display-4">--</h1>
+                            <h1 class="display-4"><%=  @alltasks  %></h1>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                                 <i class="fa fa-twitter fa-4x"></i>
                             </div>
                             <h6 class="text-uppercase">Tasks in progress</h6>
-                            <h1 class="display-4">--</h1>
+                            <h1 class="display-4"><%=  @inprogress %></h1>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                                 <i class="fa fa-share fa-4x"></i>
                             </div>
                             <h6 class="text-uppercase">Finished Tasks</h6>
-                            <h1 class="display-4">--</h1>
+                            <h1 class="display-4"><%=  @done %></h1>
                         </div>
                     </div>
                 </div>
@@ -75,13 +75,17 @@
         <ul class="list-group">
             <% @users.each do |user| %>
             <li class="list-group-item   align-items-center">
-                <label><%= user.first_name %> <%= user.last_name %></label> <label
+                <label><%= user.first_name %>  <%= user.last_name %></label> <label
                     class="pl-3"><%= user.email %></label>
+                   
                             <%= link_to 'Delete', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } ,  class: "btn btn-primary badge-pill float-right ml-2" %>
 
               
                         <%= link_to "Edit", edit_admin_user_path(user) , form: {style: 'display:inline-block;'}, class: "btn btn-info badge-pill float-right" %>
-
+ <label  class="label text-white bg-primary float-right mr-5">
+   <span class="badge badge-pill badge-light"><%= user.tasks.count %></span> tasks
+  <span class="sr-only">unread messages</span>
+</label>
                
             </li>
             <% end %>
