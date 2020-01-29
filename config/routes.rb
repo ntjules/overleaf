@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   patch "/tasks/:id/done" => "tasks#done_stask", as: "done_task"
   patch "/tasks/:id/restart" => "tasks#restart_stask", as: "restart_task"
   patch "/tasks/:id/start" => "tasks#start_stask", as: "start_task"
+
   get "/tasks" => "tasks#tasks"
   resources :tasks, :except => [:index]
   resources :users, only: [:new, :create, :show]
@@ -18,5 +19,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    patch "/users/:id/makeadmin" => "users#makeadmin", as: "makeadmin"
   end
 end

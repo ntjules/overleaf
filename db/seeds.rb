@@ -8,4 +8,5 @@
 user = User.find_or_initialize_by(email: "ntjules@gmail.com")
 user.first_name = "jules"
 user.password = "pass123"
+user.adminrole = true
 user.save!

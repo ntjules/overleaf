@@ -7,6 +7,14 @@ module SessionsHelper
     current_user.present?
   end
 
+  def admin?
+    unless logged_in? && current_user.adminrole
+      # flash[:danger] = "you are not allowed to view that page."
+
+      redirect_to all_tasks_path, notice: "you are not allowed to view that page."
+    end
+  end
+
   def logged_in_user
     unless logged_in?
       flash[:danger] = "Please log in."
