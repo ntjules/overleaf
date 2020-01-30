@@ -13,79 +13,25 @@
 
 </head>
 
-<body>
+<body  class="bgimg" >
+  
   <div class="container">
+    <%# flash.each do |key, value| %>
+    <%#= content_tag(:div, value, class: "#{key}") %>
+  <%# end %>
 
+  
+<% if logged_in? %>
+<%= render 'menu/topbar' %>
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-
-      <%= link_to image_tag('data:image/png;base64,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', :border => 0,width:"45" ) + raw("<span>Home</span>")  , all_tasks_path, class: "font-weight-bold navbar-brand" %>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-
-
-          <li class="nav-item dropdown ml-5 active">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Sort By
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "high priority", all_tasks_path(order: "hpri"),class: "dropdown-item"%>
-              <div class="dropdown-divider"></div>
-              <%= link_to "deadline desc", all_tasks_path(order: "date_desc"),class: "dropdown-item"  %>
-              <%= link_to "deadline asc", all_tasks_path(order: "date_asc"),class: "dropdown-item" %>
-
-
-            </div>
-          </li>
-
-          <li class="nav-item dropdown ml-5 active">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Search By
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "high priority", all_tasks_path(order: "pr_high"),class: "dropdown-item"  %>
-              <%= link_to "medium priority", all_tasks_path(order: "pr_med"),class: "dropdown-item" %>
-              <%= link_to "low priority", all_tasks_path(order: "pr_low"),class: "dropdown-item" %>
-            </div>
-          </li>
-
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <%= link_to 'New Task', new_task_path, class:"btn btn-outline-success mr-5" %>
-          <% if defined?(@search)  %>
-          <%= search_form_for @search do |f| %>
-
-
-          <%#= f.label :title_or_status_cont %>
-          <%= f.search_field :title_or_status_cont, placeholder: "Search", class: "form-control mr-sm-2"  %>
-
-          <%= f.submit 'Search', :class => 'btn btn-outline-secondary my-2 my-sm-0' %>
-
-          <% end %>
-          <% end %>
-          <%#= link_to "Reset Search", all_tasks_path, class:"btn btn-outline-secondary my-2 my-sm-0"  %>
-        </form>
-      </div>
-    </nav>
-    <% unless notice.nil? %>
-    
-    <div id="error_explanation" class="alert alert-info alert-dismissible">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-      <h4><i class="icon fa fa-ban"></i><%= notice %>
-      </h4>
-
-    </div>
+    <% else %>
+    　　　 <%#= link_to "Sign up", new_user_path %>
+      <%#= link_to "Login", new_session_path %>
     <% end %>
 
     <div class="row">
+
+
       <%= yield %>
     </div>
   </div>
