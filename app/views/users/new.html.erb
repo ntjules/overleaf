@@ -1,4 +1,3 @@
-<div class="bgimg">
 
 <% if @user.errors.any? %>
   <div id="error_explanation">
@@ -11,10 +10,11 @@
   </div>
 <% end %>
 
+<div class="">
 
 <%= render 'loginform' %>
 
-<div class="row card mt-5">
+<div class="row card mt-5 ">
     <h5 class="card-header text-center">Register</h5>
     <div class="card-body">
         <%= form_with(model: @user, local: true) do |f| %>
