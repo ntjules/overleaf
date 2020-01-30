@@ -5,6 +5,9 @@ require File.expand_path("../../config/environment", __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require "rspec/rails"
+
+require "database_cleaner"
+require "capybara/rspec"
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -31,6 +34,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  # config.include Warden::Test::Helpers
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -66,5 +71,17 @@ RSpec.configure do |config|
 
   config.after(:all) do
     DatabaseCleaner.clean
+  end
+
+  def create_user_and_log_in
+    user = User.new
+    user.first_name = "firstname"
+    user.email = "user@test.com"
+    user.password = "pass123"
+    user.save
+    visit new_session_path
+    fill_in :session_email, with: "user@test.com"
+    fill_in :session_password, with: "pass123"
+    click_on "Log in"
   end
 end
