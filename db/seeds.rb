@@ -10,3 +10,5 @@ user.first_name = "jules"
 user.password = "pass123"
 user.adminrole = true
 user.save!
+
+parents = Label.create([{ :label => "Front_end" }, { :label => "Back_end" }, { :label => "Design" }])

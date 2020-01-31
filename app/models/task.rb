@@ -1,6 +1,8 @@
 class Task < ApplicationRecord
+  acts_as_taggable_on :tags
   belongs_to :user
   include AASM
+  
   validates :title, presence: true, length: { maximum: 60 }
   validates :content, presence: true, length: { maximum: 300 }
   validates :deadline, :priority, presence: true

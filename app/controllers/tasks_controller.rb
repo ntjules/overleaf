@@ -6,6 +6,17 @@ class TasksController < ApplicationController
   #     end
 
   def tasks
+    @tags = Task.find(17)
+    @allt = @tags.tag_list
+      @tags.tag_list.each do |tag|
+        puts "==================================="
+      puts tag
+
+      puts "==================================="
+     end 
+    puts "==================================="
+    puts @allt
+    puts "==================================="
     # @tasks = Task.all
     # @tasks = Task.all.recent
 
@@ -49,9 +60,11 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
-    # @user = User.find(1)
-    @task.user = current_user
+    # @task = Task.new(task_params)
+    # # @user = User.find(1)
+    # @task.user = current_user
+   @task = current_user.tasks.build(task_params)
+
     if @task.save
       redirect_to all_tasks_path, notice: "Task was successfully created."
     else
@@ -109,6 +122,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :deadline, :priority)
+    params.require(:task).permit(:title, :content, :deadline, :priority, :tag_list => [])
   end
 end
