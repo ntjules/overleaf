@@ -16,12 +16,14 @@ gem "ransack"   #  for sorting & serching
 gem "kaminari" #  for pagination
 gem "bootstrap4-kaminari-views"
 gem "bcrypt", "3.1.13"
+gem "acts-as-taggable-on", "~> 6.0"
 
 gem "bootsnap", ">= 1.4.2", require: false
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "spring"
+  gem "bullet"
   gem "rspec-rails"
   gem "spring-commands-rspec"
   gem "factory_bot_rails"
