@@ -23,21 +23,21 @@ class TasksController < ApplicationController
       @search.sorts = "priority desc" if @search.sorts.empty?
       @tasks = @search.result.page params[:page]
     elsif params[:order] == "pr_high"
-      @search = current_user.tasks.recent.high.ransack(params[:q])
+      @search = current_user.tasks.includes([:taggings]).recent.high.ransack(params[:q])
 
       @tasks = @search.result.page params[:page]
     elsif params[:order] == "pr_med"
-      @search = current_user.tasks.recent.medium.ransack(params[:q])
+      @search = current_user.tasks.includes([:taggings]).recent.medium.ransack(params[:q])
       @tasks = @search.result.page params[:page]
     elsif params[:order] == "pr_low"
-      @search = current_user.tasks.recent.low.ransack(params[:q])
+      @search = current_user.tasks.includes([:taggings]).recent.low.ransack(params[:q])
       @tasks = @search.result.page params[:page]
     else
       # @search = Task.ransack(params[:q])
       # @tasks = @search.result
       # @search.build_condition
       # @tasks = @search.result.paginate(page: params[:page], per_page: 2)
-      @tasks = @search.result.page params[:page]
+      @tasks = @search.result.includes([:taggings]).page params[:page]
 
       # @tasks = @search.result(distinct: true)
     end
