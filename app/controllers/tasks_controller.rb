@@ -6,22 +6,12 @@ class TasksController < ApplicationController
   #     end
 
   def tasks
-    @tags = Task.find(17)
-    @allt = @tags.tag_list
-      @tags.tag_list.each do |tag|
-        puts "==================================="
-      puts tag
 
-      puts "==================================="
-     end 
-    puts "==================================="
-    puts @allt
-    puts "==================================="
     # @tasks = Task.all
     # @tasks = Task.all.recent
 
     # @tasks = Task.all.order(created_at: :desc)
-    @search = current_user.tasks.recent.ransack(params[:q])
+    @search = current_user.tasks.includes([:taggings]).recent.ransack(params[:q])
 
     if params[:order] == "date_desc"
       @search.sorts = "deadline desc" if @search.sorts.empty?
@@ -63,7 +53,7 @@ class TasksController < ApplicationController
     # @task = Task.new(task_params)
     # # @user = User.find(1)
     # @task.user = current_user
-   @task = current_user.tasks.build(task_params)
+    @task = current_user.tasks.build(task_params)
 
     if @task.save
       redirect_to all_tasks_path, notice: "Task was successfully created."
