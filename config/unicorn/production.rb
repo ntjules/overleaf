@@ -2,8 +2,8 @@ $worker = 2
 $timeout = 30
 
 $app_dir = "/var/www/everleaf/current"
-$listen = File.expand_path "var/sockets/unicorn.sock", $app_dir
-$pid = File.expand_path "var/pids/unicorn.pid", $app_dir
+$listen = File.expand_path "tmp/sockets/unicorn.sock", $app_dir
+$pid = File.expand_path "tmp/pids/unicorn.pid", $app_dir
 $std_log = File.expand_path "log/unicorn.log", $app_dir
 
 worker_processes $worker
