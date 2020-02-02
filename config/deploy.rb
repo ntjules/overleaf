@@ -13,7 +13,8 @@ set :branch, ENV["BRANCH"] || "aws_deploy"
 set :deploy_to, "/var/www/everleaf"
 
 # Symbolic link settings
-set :linked_files, %w{.env config/secrets.yml}
+# set :linked_files, %w{.env config/secrets.yml}
+set :linked_files, %w{config/master.key}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/uploads}
 
 # Number of versions to keep (※mentioned later)
