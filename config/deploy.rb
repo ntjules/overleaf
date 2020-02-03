@@ -7,7 +7,7 @@ set :application, "overleaf"
 set :repo_url, "https://github.com/ntjules/overleaf"
 
 # deploy branch name
-set :branch, ENV["BRANCH"] || "testdesignaws"
+set :branch, ENV["BRANCH"] || "aws_deploy"
 
 # Specify the deploy destination directory
 set :deploy_to, "/var/www/everleaf"
