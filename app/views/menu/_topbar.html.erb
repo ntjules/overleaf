@@ -57,7 +57,7 @@
           <%#= link_to "Reset Search", all_tasks_path, class:"btn btn-outline-secondary my-2 my-sm-0"  %>
         </form>
         <%= link_to "Profile", user_path(current_user.id), class:"btn btn-outline-secondary my-2 my-sm-0 ml-5"  %>
-       <%= link_to "Logout", session_path(current_user.id), method: :delete, class:"btn btn-outline-secondary my-2 my-sm-0 ml-5"  %>
+       <%= button_to "Logout", session_path(current_user.id), method: :delete, class:"btn btn-outline-secondary my-2 my-sm-0 ml-5"  %>
 
       </div>
     </nav>

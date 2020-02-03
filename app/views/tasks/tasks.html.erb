@@ -53,7 +53,8 @@
           </li>
           <li class="divider"></li>
           <li class="dropdown-item">
-            <%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } , form: {style: 'display:inline-block;'}, class: "btn btn-outline-dark btn-md btn-block" %>
+
+            <%= button_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } , form: {style: 'display:inline-block;'}, class: "btn btn-outline-dark btn-md btn-block" %>
           </li>
         </ul>
       </div>
