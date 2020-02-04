@@ -10,6 +10,8 @@ end
 RSpec.feature "User_admin", type: :feature do
   scenario "create user" do
     create_user_and_log_in
+    page.set_rack_session(user_id: user)
+
     click_on "Admin page"
     click_on "New user"
 
@@ -20,8 +22,8 @@ RSpec.feature "User_admin", type: :feature do
     fill_in "user_password_confirmation", with: "123456"
 
     click_on "Create"
-    # expect(current_url).to eq ".../admin/users"
-    # expect(page).to have_content "User was successfully created"
+
+    expect(page).to have_content "User was successfully created"
   end
 
   scenario "list users" do
@@ -43,17 +45,14 @@ RSpec.feature "User_admin", type: :feature do
     fill_in "user_password_confirmation", with: "123456"
 
     click_button "Create"
-
-    # expect(current_url).to eq "..../admin/users"
-
-    # expect(page).to have_content "user was successfully updated"
+    expect(page).to have_content "user was successfully updated"
   end
 
-  scenario "delete user" do
-    create_user_and_log_in
-    User.create!(first_name: "name1", last_name: "lastname2", email: "email2@email.com", password: "123654")
-    visit admin_users_path
-    click_on("Delete", match: :first)
-    expect(page).to have_content "User was successfully destroyed"
-  end
+  # scenario "delete user" do
+  #   create_user_and_log_in
+  #   User.create!(first_name: "name1", last_name: "lastname2", email: "email2@email.com", password: "123654")
+  #   visit admin_users_path
+  #   click_on("Delete", match: :first)
+  #   expect(page).to have_content "User was successfully destroyed"
+  # end
 end
