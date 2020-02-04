@@ -27,18 +27,20 @@
       <%# task.aasm.events(possible: true).map(&:name).each do |event| %>
       <%#= link_to t(event, scope: [:task, :event]), [event, task], method: :patch, class: "btn btn-#{t event, scope: [:task, :btn_class]}" %>
       <% task.aasm.events(possible: true).map(&:name).tap do |event| %>
+      <div class="btn-group" role="group" aria-label="Basic example">
       <% if event.include? :start %>
-      <%= link_to "Start", ['start', task], method: :patch, class: "btn btn-sm btn-outline-primary" %>
+      <%= button_to "Start", ['start', task], method: :patch, class: "btn btn-sm btn-outline-primary" %>
       <% end %>
       <% if event.include? :stop %>
-      <%= link_to "Stop", ['stop', task], method: :patch, class: "btn btn-sm btn-outline-danger" %>
+      <%= button_to "Stop", ['stop', task], method: :patch, class: "btn btn-sm btn-outline-danger" %>
       <% end %>
       <% if event.include? :restart %>
-      <%= link_to "Restart", ['restart', task], method: :patch, class: "btn btn-sm btn-outline-info" %>
+      <%= button_to "Restart", ['restart', task], method: :patch, class: "btn btn-sm btn-outline-info" %>
       <% end %>
       <% if event.include? :done %>
-      <%= link_to "Done", ['done', task], method: :patch, class: "btn btn-sm btn-outline-success" %>
+      <%= button_to "Done", ['done', task], method: :patch, class: "btn btn-sm btn-outline-success" %>
       <% end %>
+      </div>
       <% end %>
       <div class="btn-group float-xl-right">
         <button type="button" class="btn btn-outline-dark dropdown-toggle " data-toggle="dropdown">
