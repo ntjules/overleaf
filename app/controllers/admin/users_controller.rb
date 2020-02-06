@@ -62,6 +62,10 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
     params.require(:user).permit(:first_name, :last_name, :email, :password,
                                  :password_confirmation)
   end

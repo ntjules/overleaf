@@ -32,6 +32,7 @@ group :development, :test do
   gem "database_cleaner"
   gem "launchy"
   gem "selenium-webdriver"
+  gem 'rack_session_access'
 end
 
 group :development do
@@ -45,6 +46,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "database_cleaner"
+
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -9,7 +9,7 @@ class TasksController < ApplicationController
 
     # @tasks = Task.all
     # @tasks = Task.all.recent
-
+    @totaltask = current_user.tasks.count
     # @tasks = Task.all.order(created_at: :desc)
     @search = current_user.tasks.includes([:taggings]).recent.ransack(params[:q])
 
