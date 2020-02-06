@@ -80,7 +80,7 @@ RSpec.configure do |config|
     user.password = "pass123"
     user.adminrole = true
     user.save
-    # page.set_rack_session(user_id: user)
+    page.set_rack_session(user_id: user)
     visit new_session_path
     fill_in :session_email, with: "user@test.com"
     fill_in :session_password, with: "pass123"
