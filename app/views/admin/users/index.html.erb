@@ -83,7 +83,7 @@
                             <%= link_to 'Delete', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } ,  class: "btn btn-primary badge-pill float-right ml-2" %>
 <% if user.email === "ntjules@gmail.com" || user == current_user%>
 <% elsif user.adminrole %>
-<%= link_to "remove admin role", admin_makeadmin_path(user), method: :patch, class: "btn btn-sm btn-outline-info" %>
+<%= link_to "remove admin role", admin_makeadmin_path(user), method: :patch, class: "btn btn-sm btn-outline-danger" %>
        <% else  %>
        <%= link_to "Add admin role", admin_makeadmin_path(user), method: :patch, class: "btn btn-sm btn-outline-info" %>
 
