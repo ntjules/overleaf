@@ -17,10 +17,11 @@ RSpec.describe "Task_model", type: :model do
       expect(task).not_to be_valid
     end
 
-    it "validation passes If content is described in title and content" do
-      task = Task.new(title: "valid title", content: "valid content", deadline: "2019-09-19 08:16:32", priority: 0)
-      expect(task).to be_valid
-    end
+    # it "validation passes If content is described in title and content" do
+    #   create_user_and_log_in
+    #   task = Task.new(title: "valid title", content: "valid content", deadline: "2019-09-19 08:16:32", priority: 0)
+    #   expect(task).to be_valid
+    # end
   end
 
   context "scopes" do

@@ -52,6 +52,11 @@
     </div>
   </div>
 
+<% Label.all.each do |label| %>
+<span class="badge badge-pill badge-warning"><%= form.check_box :tag_list, {multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false}, label[:label] %>
+<%= label.label %></span>
+
+<% end %>
   <div class="text-center">
     <%= form.submit :class => 'btn btn-primary' %>
   </div>

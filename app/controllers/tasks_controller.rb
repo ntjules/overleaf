@@ -1,15 +1,17 @@
 class TasksController < ApplicationController
+  before_action :logged_in_user
   before_action :set_task, only: [:show, :edit, :update, :destroy, :stop_stask, :restart_stask, :done_stask, :start_stask]
 
   # def index
   #     end
 
   def tasks
+
     # @tasks = Task.all
     # @tasks = Task.all.recent
-
+    @totaltask = current_user.tasks.count
     # @tasks = Task.all.order(created_at: :desc)
-    @search = Task.recent.ransack(params[:q])
+    @search = current_user.tasks.includes([:taggings]).recent.ransack(params[:q])
 
     if params[:order] == "date_desc"
       @search.sorts = "deadline desc" if @search.sorts.empty?
@@ -21,20 +23,21 @@ class TasksController < ApplicationController
       @search.sorts = "priority desc" if @search.sorts.empty?
       @tasks = @search.result.page params[:page]
     elsif params[:order] == "pr_high"
-      @search = Task.recent.high.ransack(params[:q])
+      @search = current_user.tasks.includes([:taggings]).recent.high.ransack(params[:q])
+
       @tasks = @search.result.page params[:page]
     elsif params[:order] == "pr_med"
-      @search = Task.recent.medium.ransack(params[:q])
+      @search = current_user.tasks.includes([:taggings]).recent.medium.ransack(params[:q])
       @tasks = @search.result.page params[:page]
     elsif params[:order] == "pr_low"
-      @search = Task.recent.low.ransack(params[:q])
+      @search = current_user.tasks.includes([:taggings]).recent.low.ransack(params[:q])
       @tasks = @search.result.page params[:page]
     else
       # @search = Task.ransack(params[:q])
       # @tasks = @search.result
       # @search.build_condition
       # @tasks = @search.result.paginate(page: params[:page], per_page: 2)
-      @tasks = @search.result.page params[:page]
+      @tasks = @search.result.includes([:taggings]).page params[:page]
 
       # @tasks = @search.result(distinct: true)
     end
@@ -47,7 +50,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    # @task = Task.new(task_params)
+    # # @user = User.find(1)
+    # @task.user = current_user
+    @task = current_user.tasks.build(task_params)
 
     if @task.save
       redirect_to all_tasks_path, notice: "Task was successfully created."
@@ -106,6 +112,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :deadline, :priority)
+    params.require(:task).permit(:title, :content, :deadline, :priority, :tag_list => [])
   end
 end

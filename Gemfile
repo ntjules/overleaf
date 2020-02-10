@@ -15,12 +15,15 @@ gem "ransack"   #  for sorting & serching
 # gem "will_paginate" #  for pagination
 gem "kaminari" #  for pagination
 gem "bootstrap4-kaminari-views"
+gem "bcrypt", "3.1.13"
+gem "acts-as-taggable-on", "~> 6.0"
 
 gem "bootsnap", ">= 1.4.2", require: false
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "spring"
+  gem "bullet"
   gem "rspec-rails"
   gem "spring-commands-rspec"
   gem "factory_bot_rails"
@@ -29,6 +32,7 @@ group :development, :test do
   gem "database_cleaner"
   gem "launchy"
   gem "selenium-webdriver"
+  gem 'rack_session_access'
 end
 
 group :development do
@@ -42,6 +46,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "database_cleaner"
+
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -1,12 +1,16 @@
-<!-- <div class="col-sm">
-      <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top"
-        title="Tooltip on top topdk">
-        Tooltip on top
-      </button>
-    </div> -->
 
+<div class="col-md-12">
+  <div class="col-sm py-2">
+    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top"
+      title="Total Number of your tasks">
+      Total tasks <span class="badge badge-light"><%= @totaltask %></span>
+    </button>
+  </div>
+</div>
 <% @tasks.each do |task| %>
 <div class="col-lg-4 col-md-6 col-sm-12 pb-2">
+
+
 
   <div class="card border-info" style="min-height: 28rem; max-height: 28rem;">
     <div class="card-header pl-2">
@@ -56,7 +60,7 @@
         </ul>
       </div>
     </div>
-    <div class="card-body">
+    <div class="card-body d-flex flex-column">
 
       <div class="card-text">
 
@@ -69,7 +73,7 @@
 
         <blockquote class="blockquote">
           <p class="mb-0 pt-1 pl-3">
-             <%= truncate(task.content, length: 100) %>
+            <%= truncate(task.content, length: 100) %>
             <%= link_to 'Read more',task, class: "" %>
           </p>
           <!-- <footer class="blockquote-footer">by <cite>Albert Einstein</cite></footer> -->
@@ -82,7 +86,10 @@
         </blockquote>
         <% end %>
 
-
+        <% task.tag_list.each do |tag| %>
+        <!-- <li><%#= link_to tag, tagged_path(tag: tag) %></li> -->
+        <span class="badge badge-pill badge-warning"> <%= tag %></span>
+        <% end %>
 
 
 

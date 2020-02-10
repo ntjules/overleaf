@@ -58,8 +58,11 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.1, >= 2.1.8)
+    acts-as-taggable-on (6.5.0)
+      activerecord (>= 5.0, < 6.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
@@ -67,6 +70,9 @@ GEM
       kaminari (>= 0.13)
       rails (>= 3.1)
     builder (3.2.3)
+    bullet (6.1.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.0.1)
     capybara (3.29.0)
       addressable
@@ -140,6 +146,9 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+    rack_session_access (0.2.0)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rails (6.0.0)
       actioncable (= 6.0.0)
       actionmailbox (= 6.0.0)
@@ -231,6 +240,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    uniform_notifier (1.13.0)
     web-console (4.0.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -256,8 +266,11 @@ PLATFORMS
 
 DEPENDENCIES
   aasm (~> 4.12)
+  acts-as-taggable-on (~> 6.0)
+  bcrypt (= 3.1.13)
   bootsnap (>= 1.4.2)
   bootstrap4-kaminari-views
+  bullet
   byebug
   capybara (~> 3.29)
   database_cleaner
@@ -269,6 +282,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   pg
   puma (~> 3.11)
+  rack_session_access
   rails (~> 6.0.0)
   ransack
   rspec-rails
